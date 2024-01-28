@@ -1,10 +1,10 @@
-package br.com.fiap.lanchonete.gateway.repository.pedido;
+package br.com.fiap.pedido.gateway.repository.pedido;
 
-import br.com.fiap.lanchonete.api.adapter.PedidoAdapter;
-import br.com.fiap.lanchonete.core.entity.Pedido;
-import br.com.fiap.lanchonete.core.enumerator.StatusEnum;
-import br.com.fiap.lanchonete.core.exception.PedidoInexistenteException;
-import br.com.fiap.lanchonete.gateway.repository.IPedidoRepository;
+import br.com.fiap.pedido.api.adapter.PedidoAdapter;
+import br.com.fiap.pedido.core.entity.Pedido;
+import br.com.fiap.pedido.core.enumerator.StatusEnum;
+import br.com.fiap.pedido.core.exception.PedidoInexistenteException;
+import br.com.fiap.pedido.gateway.repository.IPedidoRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

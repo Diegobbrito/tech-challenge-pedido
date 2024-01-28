@@ -1,8 +1,8 @@
-package br.com.fiap.lanchonete.gateway.repository.pedido;
+package br.com.fiap.pedido.gateway.repository.pedido;
 
-import br.com.fiap.lanchonete.core.entity.Pedido;
-import br.com.fiap.lanchonete.core.enumerator.StatusEnum;
-import br.com.fiap.lanchonete.gateway.dataprovider.produto.ProdutoEntity;
+import br.com.fiap.pedido.core.entity.Pedido;
+import br.com.fiap.pedido.core.enumerator.StatusEnum;
+import br.com.fiap.pedido.gateway.dataprovider.produto.ProdutoEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
