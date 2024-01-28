@@ -52,16 +52,16 @@ Criar pedido com produtos e quantidade de itens desejados e cliente cadastrado. 
 Listar Pedidos - O pedido recem criado não será listado, por não estar pago ainda
 - GET /pedidos
 
-Utilizar o serviço de verificação de pagamento realizado ou pendente.
-- GET /pedidos/{pedidoId}/pagamento
+Utilizar o serviço de verificação de pedido realizado ou pendente.
+- GET /pedidos/{pedidoId}/pedido
 
-Utilizar o serviço de recebimento de pagamento realizado.
-- POST /pedidos/{pedidoId}/pagamento
+Utilizar o serviço de recebimento de pedido realizado.
+- POST /pedidos/{pedidoId}/pedido
 
-Validar se o pagamento foi realizado com sucesso.
-- GET /pedidos/{pedidoId}/pagamento
+Validar se o pedido foi realizado com sucesso.
+- GET /pedidos/{pedidoId}/pedido
 
-Listar Pedidos - O pedido deve ser listado, após etapa de pagamento
+Listar Pedidos - O pedido deve ser listado, após etapa de pedido
 - GET /pedidos
 
 Avançar o status do pedido
