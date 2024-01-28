@@ -2,8 +2,7 @@ package br.com.fiap.lanchonete.gateway.repository.pedido;
 
 import br.com.fiap.lanchonete.core.entity.Pedido;
 import br.com.fiap.lanchonete.core.enumerator.StatusEnum;
-import br.com.fiap.lanchonete.gateway.repository.cliente.ClienteEntity;
-import br.com.fiap.lanchonete.gateway.repository.produto.ProdutoEntity;
+import br.com.fiap.lanchonete.gateway.dataprovider.produto.ProdutoEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,9 +29,7 @@ public class PedidoEntity {
 
     private BigDecimal valor;
 
-    @ManyToOne
-    private ClienteEntity cliente;
-    private boolean isCliente;
+    private String cliente;
     private LocalDateTime dataCriacao;
 
     @ManyToOne
@@ -41,10 +38,7 @@ public class PedidoEntity {
 
     public PedidoEntity(Pedido pedido) {
         this.id = pedido.getId();
-        this.isCliente = pedido.isCliente();
-        if(pedido.isCliente()){
-            this.cliente = new ClienteEntity(pedido.getCliente());
-        }
+        this.cliente = pedido.getCliente();
         this.valor = pedido.getValor();
         this.status = new StatusPedidoEntity(StatusEnum.from(pedido.getStatus().getId()));
         this.dataCriacao = LocalDateTime.now();

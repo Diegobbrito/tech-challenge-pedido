@@ -13,33 +13,11 @@ import java.time.LocalDateTime;
 public class RestExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<ExceptionDetails> handlerClienteInexistenteException(ClienteInexistenteException ex){
-        final var details = new ExceptionDetails(ex.getMessage());
-        return new ResponseEntity(details, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler
     public ResponseEntity<ExceptionDetails> handlerPedidoInexistenteException(PedidoInexistenteException ex){
         final var details = new ExceptionDetails(ex.getMessage());
         return new ResponseEntity(details, HttpStatus.NOT_FOUND);
     }
-
     @ExceptionHandler
-    public ResponseEntity<ExceptionDetails> handlerCpfInvalidoException(CpfInvalidoException ex){
-        final var details = new ExceptionDetails(ex.getMessage());
-        return ResponseEntity.badRequest().body(details);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<ExceptionDetails> handlerEmailInvalidoException(EmailInvalidoException ex){
-        final var details = new ExceptionDetails(ex.getMessage());
-        return ResponseEntity.badRequest().body(details);
-    }
-    public ResponseEntity<ExceptionDetails> handlerClienteCadastradoException(ClienteCadastradoException ex){
-        final var details = new ExceptionDetails(ex.getMessage());
-        return ResponseEntity.badRequest().body(details);
-    }
-
     public ResponseEntity<ExceptionDetails> handlerPedidoStatusException(PedidoStatusException ex){
         final var details = new ExceptionDetails(ex.getMessage());
         return ResponseEntity.badRequest().body(details);

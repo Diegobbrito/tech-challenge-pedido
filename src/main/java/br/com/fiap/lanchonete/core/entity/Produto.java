@@ -8,15 +8,13 @@ public class Produto {
     private String nome;
     private String descricao;
     private BigDecimal valor;
-    private Categoria categoria;
     private String imagemUrl;
 
 
-    public Produto( String nome, String descricao, BigDecimal valor, Categoria categoria, String imagemUrl) {
+    public Produto( String nome, String descricao, BigDecimal valor, String imagemUrl) {
         this.nome = nome.trim();
         this.descricao = descricao.trim();
         this.valor = valor.setScale(2, RoundingMode.HALF_UP);
-        this.categoria = categoria;
         this.imagemUrl = imagemUrl;
     }
 
@@ -38,10 +36,6 @@ public class Produto {
 
     public BigDecimal getValor() {
         return valor;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
     }
 
     public String getImagemUrl() {

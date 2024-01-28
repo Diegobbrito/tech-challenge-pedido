@@ -1,7 +1,6 @@
-package br.com.fiap.lanchonete.gateway.repository.produto;
+package br.com.fiap.lanchonete.gateway.dataprovider.produto;
 
 import br.com.fiap.lanchonete.core.entity.Produto;
-import br.com.fiap.lanchonete.gateway.repository.categoria.CategoriaEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,15 +23,11 @@ public class ProdutoEntity {
     private BigDecimal valor;
     private String imagemUrl;
 
-    @ManyToOne
-    private CategoriaEntity categoria;
-
     public ProdutoEntity(Produto produto) {
         this.id = produto.getId();
         this.nome = produto.getNome();
         this.descricao = produto.getDescricao();
         this.valor = produto.getValor();
-        this.categoria = new CategoriaEntity(produto.getCategoria().getId());
         this.imagemUrl = produto.getImagemUrl();
     }
 }

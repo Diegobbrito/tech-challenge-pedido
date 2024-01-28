@@ -1,11 +1,11 @@
 package br.com.fiap.lanchonete.api.adapter;
 
 import br.com.fiap.lanchonete.api.dto.request.PedidoRequest;
-import br.com.fiap.lanchonete.api.dto.response.PagamentoStatusResponse;
 import br.com.fiap.lanchonete.api.dto.response.PedidoResponse;
 import br.com.fiap.lanchonete.api.dto.response.StatusResponse;
 import br.com.fiap.lanchonete.core.entity.*;
 import br.com.fiap.lanchonete.core.enumerator.StatusEnum;
+import br.com.fiap.lanchonete.gateway.dataprovider.pagamento.CriarPagamentoDto;
 import br.com.fiap.lanchonete.gateway.repository.pedido.PedidoEntity;
 
 import java.math.BigDecimal;
@@ -24,9 +24,9 @@ public class PedidoAdapter {
         final var produtos =  pedidoEntity.getProdutos().stream().map(p ->
                 new ProdutoSelecionado(ProdutoAdapter.toProduto(p.getProduto()), p.getQuantidade())
         ).collect(Collectors.toList());
-        Cliente cliente = null;
+        String cliente = "";
         if(pedidoEntity.getCliente() != null)
-            cliente = ClienteAdapter.toCliente(pedidoEntity.getCliente()) ;
+            cliente = pedidoEntity.getCliente();
         final var pedido =  new Pedido(produtos, cliente, status);
         pedido.setId(pedidoEntity.getId());
        return pedido;
@@ -42,7 +42,7 @@ public class PedidoAdapter {
         final var status = new StatusResponse(pedido.getStatus().getTipo());
         return  new PedidoResponse(pedido.getId(), formatarParaReal(pedido.getValor()), status);
     }
-    public static Pedido toPedido(PedidoRequest request, Cliente cliente, List<Produto> produtos, Status status) {
+    public static Pedido toPedido(PedidoRequest request, String cliente, List<Produto> produtos, Status status) {
         return new Pedido(getProdutosSelecionados(request, produtos), cliente, status);
     }
 
@@ -67,7 +67,11 @@ public class PedidoAdapter {
         return new PedidoResponse(pedido.getId(), formatarParaReal(pedido.getValor()), status);
     }
 
-    public static PagamentoStatusResponse toPedidoStatus(String status) {
-        return new PagamentoStatusResponse(status);
+    public static List<CriarPagamentoDto.ProdutoDto> toRequest(List<ProdutoSelecionado> produtos) {
+        return produtos.stream().map(produtoSelecionado -> {
+            var p = produtoSelecionado.getProduto();
+            return new CriarPagamentoDto.ProdutoDto(p.getNome(), p.getDescricao(), p.getValor(), p.getImagemUrl());
+        }).collect(Collectors.toList());
     }
+
 }

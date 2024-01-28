@@ -10,13 +10,10 @@ public class Pedido {
     private Integer id;
     private List<ProdutoSelecionado> produtos;
     private BigDecimal valor;
-    private Cliente cliente;
-    private boolean isCliente = false;
+    private String cliente;
     private Status status;
-    public Pedido(List<ProdutoSelecionado> produtos, Cliente cliente, Status status) {
+    public Pedido(List<ProdutoSelecionado> produtos, String cliente, Status status) {
         this.cliente = cliente;
-        if(cliente != null)
-            this.isCliente = true;
         this.valor = BigDecimal.ZERO;
         calculaValorTotalDoPedido(produtos);
         this.produtos = produtos;
@@ -48,13 +45,10 @@ public class Pedido {
         return valor;
     }
 
-    public Cliente getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public boolean isCliente() {
-        return isCliente;
-    }
 
     public Status getStatus() {
         return status;

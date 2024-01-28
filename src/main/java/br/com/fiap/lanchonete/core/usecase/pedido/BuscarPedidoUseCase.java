@@ -19,7 +19,7 @@ public class BuscarPedidoUseCase implements IBuscarPedido {
 
     @Override
     public List<PedidoResponse> buscarTodos() {
-        final var pedidos = this.pedidoRepository.buscarTodos();
+        final var pedidos = pedidoRepository.buscarTodos();
         return pedidos.stream().map(PedidoAdapter::toResponse).collect(Collectors.toList());
     }
 }

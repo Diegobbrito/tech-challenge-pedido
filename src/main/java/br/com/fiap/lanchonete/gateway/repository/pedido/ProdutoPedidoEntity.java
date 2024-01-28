@@ -1,6 +1,6 @@
 package br.com.fiap.lanchonete.gateway.repository.pedido;
 
-import br.com.fiap.lanchonete.gateway.repository.produto.ProdutoEntity;
+import br.com.fiap.lanchonete.gateway.dataprovider.produto.ProdutoEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
