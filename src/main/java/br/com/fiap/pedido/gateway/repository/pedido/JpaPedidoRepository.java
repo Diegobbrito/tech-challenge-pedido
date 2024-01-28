@@ -1,4 +1,4 @@
-package br.com.fiap.lanchonete.gateway.repository.pedido;
+package br.com.fiap.pedido.gateway.repository.pedido;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -1,4 +1,4 @@
-package br.com.fiap.lanchonete;
+package br.com.fiap.pedido;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class PedidoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LanchoneteApplication.class, args);
+		SpringApplication.run(PedidoApplication.class, args);
 	}
 
 }

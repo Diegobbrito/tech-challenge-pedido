@@ -1,16 +1,16 @@
-package br.com.fiap.lanchonete.core.usecase.pedido;
+package br.com.fiap.pedido.core.usecase.pedido;
 
-import br.com.fiap.lanchonete.api.adapter.PedidoAdapter;
-import br.com.fiap.lanchonete.api.dto.request.PedidoRequest;
-import br.com.fiap.lanchonete.api.dto.request.ProdutoSelecionadoRequest;
-import br.com.fiap.lanchonete.api.dto.response.PedidoResponse;
-import br.com.fiap.lanchonete.config.UseCase;
-import br.com.fiap.lanchonete.core.entity.Pedido;
-import br.com.fiap.lanchonete.core.entity.Status;
-import br.com.fiap.lanchonete.core.enumerator.StatusEnum;
-import br.com.fiap.lanchonete.gateway.dataprovider.IPagamentoDataProvider;
-import br.com.fiap.lanchonete.gateway.repository.IPedidoRepository;
-import br.com.fiap.lanchonete.gateway.dataprovider.IProdutoDataProvider;
+import br.com.fiap.pedido.api.adapter.PedidoAdapter;
+import br.com.fiap.pedido.api.dto.request.PedidoRequest;
+import br.com.fiap.pedido.api.dto.request.ProdutoSelecionadoRequest;
+import br.com.fiap.pedido.api.dto.response.PedidoResponse;
+import br.com.fiap.pedido.config.UseCase;
+import br.com.fiap.pedido.core.entity.Pedido;
+import br.com.fiap.pedido.core.entity.Status;
+import br.com.fiap.pedido.core.enumerator.StatusEnum;
+import br.com.fiap.pedido.gateway.dataprovider.IPagamentoDataProvider;
+import br.com.fiap.pedido.gateway.repository.IPedidoRepository;
+import br.com.fiap.pedido.gateway.dataprovider.IProdutoDataProvider;
 
 import java.util.stream.Collectors;
 @UseCase

@@ -1,12 +1,12 @@
-package br.com.fiap.lanchonete.core.usecase.pedido;
+package br.com.fiap.pedido.core.usecase.pedido;
 
-import br.com.fiap.lanchonete.api.adapter.PedidoAdapter;
-import br.com.fiap.lanchonete.api.dto.request.PedidoStatusRequest;
-import br.com.fiap.lanchonete.api.dto.response.PedidoResponse;
-import br.com.fiap.lanchonete.config.UseCase;
-import br.com.fiap.lanchonete.core.enumerator.StatusEnum;
-import br.com.fiap.lanchonete.core.exception.PedidoStatusException;
-import br.com.fiap.lanchonete.gateway.repository.IPedidoRepository;
+import br.com.fiap.pedido.api.adapter.PedidoAdapter;
+import br.com.fiap.pedido.api.dto.request.PedidoStatusRequest;
+import br.com.fiap.pedido.api.dto.response.PedidoResponse;
+import br.com.fiap.pedido.config.UseCase;
+import br.com.fiap.pedido.core.enumerator.StatusEnum;
+import br.com.fiap.pedido.core.exception.PedidoStatusException;
+import br.com.fiap.pedido.gateway.repository.IPedidoRepository;
 @UseCase
 public class GerenciarPedidoUseCase implements IGerenciarPedido {
 

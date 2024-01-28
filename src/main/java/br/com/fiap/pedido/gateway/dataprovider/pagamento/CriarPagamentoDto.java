@@ -1,4 +1,4 @@
-package br.com.fiap.lanchonete.gateway.dataprovider.pagamento;
+package br.com.fiap.pedido.gateway.dataprovider.pagamento;
 
 import java.math.BigDecimal;
 import java.util.List;

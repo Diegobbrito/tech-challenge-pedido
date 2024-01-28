@@ -1,7 +1,7 @@
-package br.com.fiap.lanchonete.gateway.dataprovider.pagamento;
+package br.com.fiap.pedido.gateway.dataprovider.pagamento;
 
-import br.com.fiap.lanchonete.core.entity.Pedido;
-import br.com.fiap.lanchonete.gateway.dataprovider.IPagamentoDataProvider;
+import br.com.fiap.pedido.core.entity.Pedido;
+import br.com.fiap.pedido.gateway.dataprovider.IPagamentoDataProvider;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -1,8 +1,8 @@
-package br.com.fiap.lanchonete.gateway.dataprovider.pagamento;
+package br.com.fiap.pedido.gateway.dataprovider.pagamento;
 
-import br.com.fiap.lanchonete.api.adapter.PedidoAdapter;
-import br.com.fiap.lanchonete.core.entity.Pedido;
-import br.com.fiap.lanchonete.gateway.dataprovider.IPagamentoDataProvider;
+import br.com.fiap.pedido.api.adapter.PedidoAdapter;
+import br.com.fiap.pedido.core.entity.Pedido;
+import br.com.fiap.pedido.gateway.dataprovider.IPagamentoDataProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;

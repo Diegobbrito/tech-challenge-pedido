@@ -1,6 +1,6 @@
-package br.com.fiap.lanchonete.gateway.dataprovider;
+package br.com.fiap.pedido.gateway.dataprovider;
 
-import br.com.fiap.lanchonete.core.entity.Produto;
+import br.com.fiap.pedido.core.entity.Produto;
 import java.util.List;
 
 public interface IProdutoDataProvider {

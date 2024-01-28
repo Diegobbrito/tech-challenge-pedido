@@ -1,12 +1,12 @@
-package br.com.fiap.lanchonete.api.adapter;
+package br.com.fiap.pedido.api.adapter;
 
-import br.com.fiap.lanchonete.api.dto.request.PedidoRequest;
-import br.com.fiap.lanchonete.api.dto.response.PedidoResponse;
-import br.com.fiap.lanchonete.api.dto.response.StatusResponse;
-import br.com.fiap.lanchonete.core.entity.*;
-import br.com.fiap.lanchonete.core.enumerator.StatusEnum;
-import br.com.fiap.lanchonete.gateway.dataprovider.pagamento.CriarPagamentoDto;
-import br.com.fiap.lanchonete.gateway.repository.pedido.PedidoEntity;
+import br.com.fiap.pedido.api.dto.request.PedidoRequest;
+import br.com.fiap.pedido.api.dto.response.PedidoResponse;
+import br.com.fiap.pedido.api.dto.response.StatusResponse;
+import br.com.fiap.pedido.core.entity.*;
+import br.com.fiap.pedido.core.enumerator.StatusEnum;
+import br.com.fiap.pedido.gateway.dataprovider.pagamento.CriarPagamentoDto;
+import br.com.fiap.pedido.gateway.repository.pedido.PedidoEntity;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;

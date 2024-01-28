@@ -1,11 +1,11 @@
-package br.com.fiap.lanchonete.api.controllers;
+package br.com.fiap.pedido.api.controllers;
 
-import br.com.fiap.lanchonete.api.dto.request.PedidoRequest;
-import br.com.fiap.lanchonete.api.dto.request.PedidoStatusRequest;
-import br.com.fiap.lanchonete.api.dto.response.PedidoResponse;
-import br.com.fiap.lanchonete.core.usecase.pedido.IBuscarPedido;
-import br.com.fiap.lanchonete.core.usecase.pedido.ICriarPedido;
-import br.com.fiap.lanchonete.core.usecase.pedido.IGerenciarPedido;
+import br.com.fiap.pedido.api.dto.request.PedidoRequest;
+import br.com.fiap.pedido.api.dto.request.PedidoStatusRequest;
+import br.com.fiap.pedido.api.dto.response.PedidoResponse;
+import br.com.fiap.pedido.core.usecase.pedido.IBuscarPedido;
+import br.com.fiap.pedido.core.usecase.pedido.ICriarPedido;
+import br.com.fiap.pedido.core.usecase.pedido.IGerenciarPedido;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

@@ -1,6 +1,6 @@
-package br.com.fiap.lanchonete.gateway.repository;
+package br.com.fiap.pedido.gateway.repository;
 
-import br.com.fiap.lanchonete.core.entity.Pedido;
+import br.com.fiap.pedido.core.entity.Pedido;
 
 import java.util.List;
 

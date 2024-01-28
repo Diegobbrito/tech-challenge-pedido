@@ -1,7 +1,7 @@
-package br.com.fiap.lanchonete.core.entity;
+package br.com.fiap.pedido.core.entity;
 
 
-import br.com.fiap.lanchonete.core.enumerator.StatusEnum;
+import br.com.fiap.pedido.core.enumerator.StatusEnum;
 
 import java.math.BigDecimal;
 import java.util.List;

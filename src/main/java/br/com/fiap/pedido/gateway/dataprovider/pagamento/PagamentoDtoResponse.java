@@ -1,6 +1,6 @@
-package br.com.fiap.lanchonete.gateway.dataprovider.pagamento;
+package br.com.fiap.pedido.gateway.dataprovider.pagamento;
 
-import br.com.fiap.lanchonete.core.enumerator.StatusEnum;
+import br.com.fiap.pedido.core.enumerator.StatusEnum;
 
 import java.math.BigDecimal;
 import java.util.UUID;
