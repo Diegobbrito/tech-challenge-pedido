@@ -1,0 +1,14 @@
+{
+  "title": "Pedido Response",
+  "type": "object",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {"type": "integer"},
+      "valorTotal": {"type": "string"},
+      "status": {"type": "string"},
+      "qrData": {"type": "string"}
+    },
+    "required": ["id", "valorTotal", "status", "qrData"]
+  }
+}
