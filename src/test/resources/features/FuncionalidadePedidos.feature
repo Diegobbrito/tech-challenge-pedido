@@ -11,7 +11,6 @@ Funcionalidade: API - Pedidos
     Quando requisitar a busca de todos os pedidos
     Então os pedidos são exibidos com sucesso
 
-  Cenário: Atualizar statis do pedido
-    Dado que um pedido já foi registrado
+  Cenário: Atualizar status do pedido
     Quando requisitar a atualização de um pedido
     Então o pedido é atualizado

@@ -1,9 +1,10 @@
 package pedido.gateway.dataprovider.pagamento;
 
-import br.com.fiap.pedido.api.dto.request.ProdutoSelecionadoRequest;
 import br.com.fiap.pedido.core.entity.Pedido;
+import br.com.fiap.pedido.core.enumerator.StatusEnum;
 import br.com.fiap.pedido.gateway.dataprovider.pagamento.PagamentoAPIDataProvider;
 import br.com.fiap.pedido.gateway.dataprovider.pagamento.PagamentoDataProvider;
+import br.com.fiap.pedido.gateway.dataprovider.pagamento.PagamentoDtoResponse;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,10 +14,11 @@ import pedido.utils.PedidoHelper;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
 
@@ -43,15 +45,17 @@ class PagamentoDataProviderTest {
     void testCriarPagamento() {
 
         Pedido pedido = PedidoHelper.gerarPedido();
+        PagamentoDtoResponse pagamentoDtoResponse = new PagamentoDtoResponse(UUID.randomUUID(), "qrData", StatusEnum.PAGAMENTOPENDENTE, new BigDecimal("19.99"));
 
-        when(dataProvider.criarPagamento(any(Pedido.class))).thenReturn("qrData");
 
-        var pagamento = pedidoDataProvider.criarPagamento(pedido);
+        when(dataProvider.criarPagamento(any(Pedido.class),  anyList())).thenReturn(pagamentoDtoResponse);
+
+        var pagamento = pedidoDataProvider.criarPagamento(pedido,  List.of(PedidoHelper.gerarProduto()));
 
         assertThat(pagamento)
-                .isInstanceOf(String.class)
+                .isInstanceOf(PagamentoDtoResponse.class)
                 .isNotNull();
-        assertThat(pagamento)
+        assertThat(pagamento).extracting(PagamentoDtoResponse::qrData)
                 .isEqualTo("qrData");
     }
 }

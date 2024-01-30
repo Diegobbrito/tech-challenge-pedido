@@ -42,8 +42,8 @@ public class CriarPedidoUseCase implements ICriarPedido {
 
         final var entity = pedidoRepository.salvar(pedido);
 
-        final var qrData = pagamentoDataProvider.criarPagamento(entity);
+        final var pagamentoResponse = pagamentoDataProvider.criarPagamento(entity, produtos);
 
-        return PedidoAdapter.toResponse(entity, qrData);
+        return PedidoAdapter.toResponse(entity, pagamentoResponse);
     }
 }

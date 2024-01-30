@@ -97,7 +97,7 @@ class PedidoControllerTest {
         when(gerenciarPedidoUseCase.atualizar(anyInt(), any(PedidoStatusRequest.class)))
                 .thenReturn(pedidoResponse);
 
-        mockMvc.perform(patch("/pedidos/{pedidoId}/atualizar", 1)
+        mockMvc.perform(patch("/pedidos/{pedidoId}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(request)))
                 .andExpect(status().isOk());

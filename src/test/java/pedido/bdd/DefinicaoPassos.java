@@ -18,7 +18,7 @@ public class DefinicaoPassos {
 
     private PedidoResponse pedidoResponse;
 
-    private String ENDPOINT_BASE = "http://localhost:8080/lanchonete/pedidos";
+    private String ENDPOINT_BASE = "http://localhost:8082/lanchonete/pedidos";
 
     @Quando("submeter um novo pedido")
     public PedidoResponse submeterUmNovoPedido() {
@@ -61,7 +61,7 @@ public class DefinicaoPassos {
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(pedidoRequest)
                 .when()
-                .post(ENDPOINT_BASE + "/{pedidoId}/atualizar" , pedidoResponse.getId());
+                .patch(ENDPOINT_BASE + "/{pedidoId}" , 1);
     }
     @Então("o pedido é atualizado")
     public void pedidoAtualizado() {

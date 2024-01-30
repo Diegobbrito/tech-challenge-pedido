@@ -6,26 +6,6 @@ Projeto desenvolvido para o Tech Challenge da Pos Tech FIAP+Alura.
 
 Faça download do projeto e na pasta principal rode os comandos no terminal para cada arquivo, seguindo a ordem:
 
-Banco de dados:
-```bash
-   kubectl apply -f ./k8s/db/<file>.yaml 
-```
-Arquivos para banco de dados:
-
-    1. db-secret.yaml
-    2. pv.yaml
-    3. pvc.yaml
-    4. db-service.yaml
-    5. db-deployment.yaml
-Aplicação:
-```bash
-   kubectl apply -f ./k8s/app/<file>.yaml 
-```
-Arquivos para aplicação:
-
-    5. service.yaml
-    6. deployment.yaml
-
 ## Como testar a aplicação com docker compose
 
 Faça download do projeto e na pasta principal rode o comando no terminal:
@@ -40,26 +20,11 @@ O Swagger está documentado com exemplos de request.
 
 ### Opção de fluxo, usando o swagger
 
-Cria um cliente com cpf valido
-- POST /clientes
-
-Verificar os produtos disponiveis e seus respectivos ids para o pedido
-- GET /produtos
-
 Criar pedido com produtos e quantidade de itens desejados e cliente cadastrado. Para pedidos sem cliente, passar o cpf como nulo ou uma string vazia. ("")
 - POST /pedidos
 
 Listar Pedidos - O pedido recem criado não será listado, por não estar pago ainda
 - GET /pedidos
-
-Utilizar o serviço de verificação de pedido realizado ou pendente.
-- GET /pedidos/{pedidoId}/pedido
-
-Utilizar o serviço de recebimento de pedido realizado.
-- POST /pedidos/{pedidoId}/pedido
-
-Validar se o pedido foi realizado com sucesso.
-- GET /pedidos/{pedidoId}/pedido
 
 Listar Pedidos - O pedido deve ser listado, após etapa de pedido
 - GET /pedidos

@@ -2,6 +2,7 @@ package br.com.fiap.pedido.gateway.dataprovider.pagamento;
 
 import br.com.fiap.pedido.api.adapter.PedidoAdapter;
 import br.com.fiap.pedido.core.entity.Pedido;
+import br.com.fiap.pedido.core.entity.Produto;
 import br.com.fiap.pedido.gateway.dataprovider.IPagamentoDataProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @Component
 public class PagamentoAPIDataProvider implements IPagamentoDataProvider {
 
-    @Value("pagamento.host")
+    @Value("${pagamento.host}")
     private String pagamentoHost;
 
     private final RestClient restClient;
@@ -24,8 +25,8 @@ public class PagamentoAPIDataProvider implements IPagamentoDataProvider {
     }
 
     @Override
-    public String criarPagamento(Pedido entity) {
-        List<CriarPagamentoDto.ProdutoDto> produtos = PedidoAdapter.toRequest(entity.getProdutos());
+    public PagamentoDtoResponse criarPagamento(Pedido entity, List<Produto> produtosList) {
+        List<CriarPagamentoDto.ProdutoDto> produtos = PedidoAdapter.toRequest(entity.getProdutos(), produtosList);
         CriarPagamentoDto dto = new CriarPagamentoDto(
                 produtos,
                 entity.getCliente(),
@@ -37,8 +38,8 @@ public class PagamentoAPIDataProvider implements IPagamentoDataProvider {
                 .body(dto)
                 .retrieve()
                 .toEntity(PagamentoDtoResponse.class);
-        if (response.getBody() != null && response.getBody().qrData() != null)
-            return response.getBody().qrData();
+        if (response.getBody() != null)
+            return response.getBody();
         throw new RuntimeException("Erro ao gerar pagamento");
     }
 

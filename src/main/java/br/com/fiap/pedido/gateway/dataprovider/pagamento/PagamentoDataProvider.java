@@ -1,8 +1,11 @@
 package br.com.fiap.pedido.gateway.dataprovider.pagamento;
 
 import br.com.fiap.pedido.core.entity.Pedido;
+import br.com.fiap.pedido.core.entity.Produto;
 import br.com.fiap.pedido.gateway.dataprovider.IPagamentoDataProvider;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class PagamentoDataProvider implements IPagamentoDataProvider {
@@ -14,7 +17,7 @@ public class PagamentoDataProvider implements IPagamentoDataProvider {
     }
 
     @Override
-    public String criarPagamento(Pedido entity) {
-        return dataProvider.criarPagamento(entity);
+    public PagamentoDtoResponse criarPagamento(Pedido entity, List<Produto> produtos) {
+        return dataProvider.criarPagamento(entity, produtos);
     }
 }
