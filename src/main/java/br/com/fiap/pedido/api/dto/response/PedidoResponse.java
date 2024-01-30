@@ -11,7 +11,8 @@ public class PedidoResponse {
     private Integer id;
     @Schema(example = "R$ 24,90")
     private String valorTotal;
-    private StatusResponse status;
+    @Schema(example = "AGUARDANDO PAGAMENTO")
+    private String status;
 
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     private String qrData;
@@ -19,7 +20,7 @@ public class PedidoResponse {
     @JsonInclude(value = JsonInclude.Include.NON_NULL)
     private UUID pagamentoId;
 
-    public PedidoResponse(Integer id, String valor, StatusResponse status) {
+    public PedidoResponse(Integer id, String valor, String status) {
         this.id = id;
         this.valorTotal = valor;
         this.status = status;
@@ -33,7 +34,7 @@ public class PedidoResponse {
         return valorTotal;
     }
 
-    public StatusResponse getStatus() {
+    public String getStatus() {
         return status;
     }
 

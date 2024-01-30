@@ -12,17 +12,30 @@ public class Pedido {
     private BigDecimal valor;
     private String cliente;
     private Status status;
-    public Pedido(List<ProdutoSelecionado> produtos, String cliente, Status status) {
+
+    public Pedido(Integer id, List<ProdutoSelecionado> produtos, BigDecimal valor, String cliente, Status status) {
+        this.id = id;
+        this.produtos = produtos;
+        this.valor = valor;
+        this.cliente = cliente;
+        this.status = status;
+    }
+
+    public Pedido(List<ProdutoSelecionado> produtos, String cliente, Status status, List<Produto> produtoList) {
         this.cliente = cliente;
         this.valor = BigDecimal.ZERO;
-        calculaValorTotalDoPedido(produtos);
+        calculaValorTotalDoPedido(produtos, produtoList);
         this.produtos = produtos;
         this.status = status;
     }
 
-    private void calculaValorTotalDoPedido(List<ProdutoSelecionado> produtos) {
-        produtos.forEach(p ->
-            this.valor = this.valor.add(p.getProduto().getValor().multiply(BigDecimal.valueOf(p.getQuantidade())))
+    private void calculaValorTotalDoPedido(List<ProdutoSelecionado> produtos, List<Produto> produtoList) {
+        produtos.forEach(p -> produtoList.forEach(produto -> {
+            if(produto.getId().equals(p.getProdutoId())){
+                var valorDoProduto = produto.getValor().multiply(BigDecimal.valueOf(p.getQuantidade()));
+                this.valor = this.valor.add(valorDoProduto);
+            }
+        })
         );
     }
 

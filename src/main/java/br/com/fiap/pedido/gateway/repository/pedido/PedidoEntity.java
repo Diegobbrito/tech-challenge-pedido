@@ -2,7 +2,6 @@ package br.com.fiap.pedido.gateway.repository.pedido;
 
 import br.com.fiap.pedido.core.entity.Pedido;
 import br.com.fiap.pedido.core.enumerator.StatusEnum;
-import br.com.fiap.pedido.gateway.dataprovider.produto.ProdutoEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +26,8 @@ public class PedidoEntity {
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProdutoPedidoEntity> produtos = new ArrayList<>();
 
+
+
     private BigDecimal valor;
 
     private String cliente;
@@ -42,9 +43,9 @@ public class PedidoEntity {
         this.valor = pedido.getValor();
         this.status = new StatusPedidoEntity(StatusEnum.from(pedido.getStatus().getId()));
         this.dataCriacao = LocalDateTime.now();
-        this.produtos = pedido.getProdutos().stream().map(p ->
-                new ProdutoPedidoEntity(this, new ProdutoEntity(p.getProduto()), p.getQuantidade())
-        ).collect(Collectors.toList());
+        this.produtos = pedido.getProdutos().stream()
+                .map(p -> new ProdutoPedidoEntity(this, p.getProdutoId(), p.getQuantidade()))
+                .collect(Collectors.toList());
     }
 
 }

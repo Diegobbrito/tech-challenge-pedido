@@ -1,6 +1,5 @@
 package br.com.fiap.pedido.gateway.repository.pedido;
 
-import br.com.fiap.pedido.gateway.dataprovider.produto.ProdutoEntity;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,15 +18,13 @@ public class ProdutoPedidoEntity {
     @JoinColumn(name = "pedido_id")
     private PedidoEntity pedido;
 
-    @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private ProdutoEntity produto;
+    private Integer produtoId;
 
     private Integer quantidade;
 
-    public ProdutoPedidoEntity(PedidoEntity pedido, ProdutoEntity produto, Integer quantidade) {
+    public ProdutoPedidoEntity(PedidoEntity pedido, Integer produtoId, Integer quantidade) {
         this.pedido = pedido;
-        this.produto = produto;
+        this.produtoId = produtoId;
         this.quantidade = quantidade;
     }
 }

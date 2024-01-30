@@ -1,16 +1,16 @@
 package br.com.fiap.pedido.core.entity;
 
 public class ProdutoSelecionado {
-    private Produto produto;
+    private Integer produtoId;
     private Integer quantidade;
 
-    public ProdutoSelecionado(Produto produto, Integer quantidade) {
-        this.produto = produto;
+    public ProdutoSelecionado(Integer produtoId, Integer quantidade) {
+        this.produtoId = produtoId;
         this.quantidade = quantidade;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public Integer getProdutoId() {
+        return produtoId;
     }
 
     public Integer getQuantidade() {
