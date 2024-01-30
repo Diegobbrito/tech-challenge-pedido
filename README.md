@@ -1,6 +1,7 @@
 # Pos Tech Lanchonete
 
 Projeto desenvolvido para o Tech Challenge da Pos Tech FIAP+Alura.
+Aplicação para criação e gerenciamento de produto
 
 ## Como testar a aplicação com kubernetes
 
