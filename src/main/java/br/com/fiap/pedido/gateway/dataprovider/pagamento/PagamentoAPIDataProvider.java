@@ -14,7 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @Component
 public class PagamentoAPIDataProvider implements IPagamentoDataProvider {
 
-    @Value("pagamento.host")
+    @Value("${pagamento.host}")
     private String pagamentoHost;
 
     private final RestClient restClient;
@@ -24,7 +24,7 @@ public class PagamentoAPIDataProvider implements IPagamentoDataProvider {
     }
 
     @Override
-    public String criarPagamento(Pedido entity) {
+    public PagamentoDtoResponse criarPagamento(Pedido entity) {
         List<CriarPagamentoDto.ProdutoDto> produtos = PedidoAdapter.toRequest(entity.getProdutos());
         CriarPagamentoDto dto = new CriarPagamentoDto(
                 produtos,
@@ -37,8 +37,8 @@ public class PagamentoAPIDataProvider implements IPagamentoDataProvider {
                 .body(dto)
                 .retrieve()
                 .toEntity(PagamentoDtoResponse.class);
-        if (response.getBody() != null && response.getBody().qrData() != null)
-            return response.getBody().qrData();
+        if (response.getBody() != null)
+            return response.getBody();
         throw new RuntimeException("Erro ao gerar pagamento");
     }
 

@@ -14,7 +14,7 @@ public class PagamentoDataProvider implements IPagamentoDataProvider {
     }
 
     @Override
-    public String criarPagamento(Pedido entity) {
+    public PagamentoDtoResponse criarPagamento(Pedido entity) {
         return dataProvider.criarPagamento(entity);
     }
 }
