@@ -6,6 +6,7 @@ import br.com.fiap.pedido.api.dto.response.StatusResponse;
 import br.com.fiap.pedido.core.entity.*;
 import br.com.fiap.pedido.core.enumerator.StatusEnum;
 import br.com.fiap.pedido.gateway.dataprovider.pagamento.CriarPagamentoDto;
+import br.com.fiap.pedido.gateway.dataprovider.pagamento.PagamentoDtoResponse;
 import br.com.fiap.pedido.gateway.repository.pedido.PedidoEntity;
 
 import java.math.BigDecimal;
@@ -32,10 +33,11 @@ public class PedidoAdapter {
        return pedido;
     }
 
-    public static PedidoResponse toResponse(Pedido pedido, String qrData) {
+    public static PedidoResponse toResponse(Pedido pedido, PagamentoDtoResponse pagamento) {
         final var status = new StatusResponse(pedido.getStatus().getTipo());
         final var response = new PedidoResponse(pedido.getId(), formatarParaReal(pedido.getValor()), status);
-        response.setQrData(qrData);
+        response.setQrData(pagamento.qrData());
+        response.setPagamentoId(pagamento.id());
         return response;
     }
     public static PedidoResponse toResponse(Pedido pedido) {
