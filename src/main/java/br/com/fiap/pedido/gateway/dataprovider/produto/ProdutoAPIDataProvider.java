@@ -25,7 +25,7 @@ public class ProdutoAPIDataProvider implements IProdutoDataProvider {
         this.restClient = restClient;
     }
 
-    ParameterizedTypeReference<List<ProdutoDtoResponse>> produtosResponse = new ParameterizedTypeReference<List<ProdutoDtoResponse>>() {};
+    ParameterizedTypeReference<List<ProdutoDtoResponse>> produtosResponse = new ParameterizedTypeReference<>() {};
 
     @Override
     public List<Produto> buscarTodosPorIds(List<Integer> produtoIds) {
@@ -33,13 +33,16 @@ public class ProdutoAPIDataProvider implements IProdutoDataProvider {
         produtoIds.forEach(id -> ids.append(id).append(","));
         ids.deleteCharAt(ids.length()-1);
 
-        var response = restClient.get()
-                .uri(produtoHost + "?ids=" + ids.toString())
+        List<ProdutoDtoResponse> response;
+        response = restClient.get()
+                .uri(produtoHost + "?ids=" + ids)
                 .accept(APPLICATION_JSON)
                 .retrieve()
-                .toEntity(produtosResponse);
+                .toEntity(produtosResponse).getBody();
 
 
-        return response.getBody().stream().map(ProdutoAdapter::toProduto).collect(Collectors.toList());
+        if(response == null)
+            throw new IllegalArgumentException("Produtos não encontrados");
+        return response.stream().map(ProdutoAdapter::toProduto).collect(Collectors.toList());
     }
 }
