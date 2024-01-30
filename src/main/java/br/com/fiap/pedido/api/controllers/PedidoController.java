@@ -9,6 +9,7 @@ import br.com.fiap.pedido.core.usecase.pedido.IGerenciarPedido;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,12 +40,11 @@ public class PedidoController {
     @PostMapping
     public ResponseEntity<PedidoResponse> criar(@RequestBody PedidoRequest request){
         final var response = criarPedidoUseCase.criar(request);
-        final var uri = URI.create("/pedidos/" + response.getId());
-        return ResponseEntity.created(uri).body(response);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @Operation(summary = "Atualização do status do  pedido")
-    @PatchMapping("/{pedidoId}/atualizar")
+    @PatchMapping("/{pedidoId}")
     public ResponseEntity<PedidoResponse> atualizar(@Parameter(example = "1") @PathVariable Integer pedidoId, @RequestBody PedidoStatusRequest request){
         return ResponseEntity.ok(gerenciarPedidoUseCase.atualizar(pedidoId, request)) ;
     }
