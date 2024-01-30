@@ -9,6 +9,6 @@
       "status": {"type": "string"},
       "qrData": {"type": "string"}
     },
-    "required": ["id", "valorTotal", "status", "qrData"]
+    "required": ["id", "valorTotal", "status"]
   }
 }
