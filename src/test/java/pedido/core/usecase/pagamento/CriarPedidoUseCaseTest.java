@@ -3,11 +3,11 @@ package pedido.core.usecase.pagamento;
 import br.com.fiap.pedido.api.dto.response.PedidoResponse;
 import br.com.fiap.pedido.core.entity.Pedido;
 import br.com.fiap.pedido.core.entity.Produto;
-import br.com.fiap.pedido.core.entity.ProdutoSelecionado;
-import br.com.fiap.pedido.core.entity.Status;
+import br.com.fiap.pedido.core.enumerator.StatusEnum;
 import br.com.fiap.pedido.core.usecase.pedido.CriarPedidoUseCase;
 import br.com.fiap.pedido.gateway.dataprovider.IPagamentoDataProvider;
 import br.com.fiap.pedido.gateway.dataprovider.IProdutoDataProvider;
+import br.com.fiap.pedido.gateway.dataprovider.pagamento.PagamentoDtoResponse;
 import br.com.fiap.pedido.gateway.repository.IPedidoRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,6 +18,7 @@ import pedido.utils.PedidoHelper;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -54,9 +55,11 @@ class CriarPedidoUseCaseTest {
         Produto produto = PedidoHelper.gerarProduto();
         Pedido pedido = PedidoHelper.gerarPedido();
 
+        PagamentoDtoResponse pagamentoDtoResponse = new PagamentoDtoResponse(UUID.randomUUID(), "qrData", StatusEnum.PAGAMENTOPENDENTE, new BigDecimal("19.99"));
+
         when(produtoDataProvider.buscarTodosPorIds(anyList())).thenReturn(List.of(produto));
         when(pedidoRepository.salvar(any(Pedido.class))).thenReturn(pedido);
-        when(pagamentoDataProvider.criarPagamento(any(Pedido.class))).thenReturn("qrData");
+        when(pagamentoDataProvider.criarPagamento(any(Pedido.class))).thenReturn(pagamentoDtoResponse);
         // Act
         var pagamento = useCase.criar(pedidoRequest);
         // Assert
