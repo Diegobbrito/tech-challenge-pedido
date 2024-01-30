@@ -18,7 +18,7 @@ public class ProdutoAdapter {
         final var produto = new Produto(
                 dto.nome(),
                 dto.descricao(),
-                new BigDecimal(dto.valor().substring(2).trim()),
+                new BigDecimal(dto.valor().substring(2).replace(',','.').trim()),
                 dto.imagemUrl());
         produto.setId(dto.id());
         return produto;
