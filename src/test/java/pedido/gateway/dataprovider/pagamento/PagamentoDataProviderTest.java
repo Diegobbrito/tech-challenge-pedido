@@ -1,6 +1,5 @@
 package pedido.gateway.dataprovider.pagamento;
 
-import br.com.fiap.pedido.api.dto.request.ProdutoSelecionadoRequest;
 import br.com.fiap.pedido.core.entity.Pedido;
 import br.com.fiap.pedido.core.enumerator.StatusEnum;
 import br.com.fiap.pedido.gateway.dataprovider.pagamento.PagamentoAPIDataProvider;
@@ -19,7 +18,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.when;
 
 
@@ -49,9 +48,9 @@ class PagamentoDataProviderTest {
         PagamentoDtoResponse pagamentoDtoResponse = new PagamentoDtoResponse(UUID.randomUUID(), "qrData", StatusEnum.PAGAMENTOPENDENTE, new BigDecimal("19.99"));
 
 
-        when(dataProvider.criarPagamento(any(Pedido.class))).thenReturn(pagamentoDtoResponse);
+        when(dataProvider.criarPagamento(any(Pedido.class),  anyList())).thenReturn(pagamentoDtoResponse);
 
-        var pagamento = pedidoDataProvider.criarPagamento(pedido);
+        var pagamento = pedidoDataProvider.criarPagamento(pedido,  List.of(PedidoHelper.gerarProduto()));
 
         assertThat(pagamento)
                 .isInstanceOf(PagamentoDtoResponse.class)

@@ -59,13 +59,13 @@ class CriarPedidoUseCaseTest {
 
         when(produtoDataProvider.buscarTodosPorIds(anyList())).thenReturn(List.of(produto));
         when(pedidoRepository.salvar(any(Pedido.class))).thenReturn(pedido);
-        when(pagamentoDataProvider.criarPagamento(any(Pedido.class))).thenReturn(pagamentoDtoResponse);
+        when(pagamentoDataProvider.criarPagamento(any(Pedido.class), anyList())).thenReturn(pagamentoDtoResponse);
         // Act
         var pagamento = useCase.criar(pedidoRequest);
         // Assert
         verify(produtoDataProvider, times(1)).buscarTodosPorIds(anyList());
         verify(pedidoRepository, times(1)).salvar(any(Pedido.class));
-        verify(pagamentoDataProvider, times(1)).criarPagamento(any(Pedido.class));
+        verify(pagamentoDataProvider, times(1)).criarPagamento(any(Pedido.class),  anyList());
 
         assertThat(pagamento)
                 .isInstanceOf(PedidoResponse.class)

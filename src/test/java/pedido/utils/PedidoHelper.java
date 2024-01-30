@@ -23,19 +23,20 @@ public abstract class PedidoHelper {
     }
 
     public static PedidoResponse gerarPedidoResponse() {
-        var response = new PedidoResponse(1, "R$ 19,99", new StatusResponse("Recebido"));
+        var response = new PedidoResponse(1, "R$ 19,99","Recebido");
         response.setQrData("qrData");
         return response;
     }
 
     public static Pedido gerarPedido() {
-        Produto produto = new Produto("Hambuguer", "Hamburguer da casa", new BigDecimal("19.99"), "");
-        ProdutoSelecionado produtoSelecionado = new ProdutoSelecionado(produto,1);
-        List<ProdutoSelecionado> produtos = List.of(produtoSelecionado);
+        Produto produto = gerarProduto();
+        ProdutoSelecionado produtoSelecionado = new ProdutoSelecionado(1,1);
+        List<ProdutoSelecionado> produtosSelecionados = List.of(produtoSelecionado);
+        List<Produto> produtos = List.of(produto);
         String cliente = "";
         Status status = new Status(StatusEnum.PAGAMENTOPENDENTE);
 
-        var pedido = new Pedido(produtos, cliente, status);
+        var pedido = new Pedido(produtosSelecionados, cliente, status, produtos);
         pedido.setId(1);
         return pedido;
     }
@@ -47,6 +48,6 @@ public abstract class PedidoHelper {
     }
 
     public static PedidoStatusRequest gerarPedidoStatusRequest() {
-        return new PedidoStatusRequest(2);
+        return new PedidoStatusRequest(3);
     }
 }
