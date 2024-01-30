@@ -16,7 +16,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 @Component
 public class ProdutoAPIDataProvider implements IProdutoDataProvider {
 
-    @Value("produto.host")
+    @Value("${produto.host}")
     private String produtoHost;
 
     private final RestClient restClient;
@@ -25,14 +25,12 @@ public class ProdutoAPIDataProvider implements IProdutoDataProvider {
         this.restClient = restClient;
     }
 
-    ParameterizedTypeReference<List<ProdutoDtoResponse>> produtosResponse;
+    ParameterizedTypeReference<List<ProdutoDtoResponse>> produtosResponse = new ParameterizedTypeReference<List<ProdutoDtoResponse>>() {};
 
     @Override
     public List<Produto> buscarTodosPorIds(List<Integer> produtoIds) {
         StringBuilder ids = new StringBuilder();
-        produtoIds.forEach(id ->{
-            ids.append(id).append(",");
-        });
+        produtoIds.forEach(id -> ids.append(id).append(","));
         ids.deleteCharAt(ids.length()-1);
 
         var response = restClient.get()
