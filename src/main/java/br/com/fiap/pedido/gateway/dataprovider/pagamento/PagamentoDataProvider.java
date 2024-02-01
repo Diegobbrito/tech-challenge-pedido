@@ -12,8 +12,8 @@ public class PagamentoDataProvider implements IPagamentoDataProvider {
 
     private final PagamentoAPIDataProvider dataProvider;
 
-    public PagamentoDataProvider(PagamentoAPIDataProvider repository) {
-        this.dataProvider = repository;
+    public PagamentoDataProvider(PagamentoAPIDataProvider dataProvider) {
+        this.dataProvider = dataProvider;
     }
 
     @Override
