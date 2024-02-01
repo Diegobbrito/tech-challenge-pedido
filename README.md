@@ -1,10 +1,11 @@
 # Pos Tech Lanchonete
 
 Projeto desenvolvido para o Tech Challenge da Pos Tech FIAP+Alura.
+Aplicação para criação e gerenciamento de pedido.
 
-## Como testar a aplicação com kubernetes
+## Link da projeto no SonarCloud
+-  [SonarCloud - Pedido](https://sonarcloud.io/project/overview?id=Diegobbrito_tech-challenge-pedido)
 
-Faça download do projeto e na pasta principal rode os comandos no terminal para cada arquivo, seguindo a ordem:
 
 ## Como testar a aplicação com docker compose
 
