@@ -1,8 +1,10 @@
 package pedido.api.controller;
 
+import br.com.fiap.pedido.PedidoApplication;
 import br.com.fiap.pedido.api.controllers.PedidoController;
 import br.com.fiap.pedido.api.dto.request.PedidoRequest;
 import br.com.fiap.pedido.api.dto.request.PedidoStatusRequest;
+import br.com.fiap.pedido.core.exception.PedidoInexistenteException;
 import br.com.fiap.pedido.core.usecase.pedido.IBuscarPedido;
 import br.com.fiap.pedido.core.usecase.pedido.ICriarPedido;
 import br.com.fiap.pedido.core.usecase.pedido.IGerenciarPedido;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -28,6 +31,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@SpringBootTest(classes = {PedidoApplication.class, PedidoControllerTest.class})
 class PedidoControllerTest {
 
     private MockMvc mockMvc;
@@ -38,6 +42,10 @@ class PedidoControllerTest {
     @Mock
     private IGerenciarPedido gerenciarPedidoUseCase;
     AutoCloseable openMocks;
+
+    PedidoControllerTest(){
+
+    }
 
     @BeforeEach
     void setUp() {
@@ -86,6 +94,28 @@ class PedidoControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(pedidoResponse.getId()))
                 .andExpect(jsonPath("$[0].valorTotal").value(pedidoResponse.getValorTotal()));
+        verify(buscarPedidoUseCase, times(1)).buscarTodos();
+    }
+
+    @Test
+    void deveRetornarExceptionAoConsultarPedidoInexistente() throws Exception {
+        when(buscarPedidoUseCase.buscarTodos())
+                .thenThrow(PedidoInexistenteException.class);
+
+        mockMvc.perform(get("/pedidos")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+        verify(buscarPedidoUseCase, times(1)).buscarTodos();
+    }
+
+    @Test
+    void deveRetornarExceptionAoConsultarPedidoETerErro() throws Exception {
+        when(buscarPedidoUseCase.buscarTodos())
+                .thenThrow(IllegalArgumentException.class);
+
+        mockMvc.perform(get("/pedidos")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
         verify(buscarPedidoUseCase, times(1)).buscarTodos();
     }
 
