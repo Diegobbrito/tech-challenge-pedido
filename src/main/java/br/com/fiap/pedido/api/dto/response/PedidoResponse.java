@@ -1,9 +1,6 @@
 package br.com.fiap.pedido.api.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
-
-import java.util.UUID;
 
 public class PedidoResponse {
 
@@ -13,12 +10,6 @@ public class PedidoResponse {
     private String valorTotal;
     @Schema(example = "AGUARDANDO PAGAMENTO")
     private String status;
-
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    private String qrData;
-
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    private UUID pagamentoId;
 
     public PedidoResponse(Integer id, String valor, String status) {
         this.id = id;
@@ -36,20 +27,5 @@ public class PedidoResponse {
 
     public String getStatus() {
         return status;
-    }
-
-    public String getQrData() {
-        return qrData;
-    }
-
-    public UUID getPagamentoId() {
-        return pagamentoId;
-    }
-
-    public void setQrData(String qrData) {
-        this.qrData = qrData;
-    }
-    public void setPagamentoId(UUID pagamentoId) {
-        this.pagamentoId = pagamentoId;
     }
 }
