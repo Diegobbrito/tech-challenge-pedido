@@ -8,9 +8,11 @@ import br.com.fiap.pedido.config.UseCase;
 import br.com.fiap.pedido.core.entity.Pedido;
 import br.com.fiap.pedido.core.entity.Status;
 import br.com.fiap.pedido.core.enumerator.StatusEnum;
-import br.com.fiap.pedido.gateway.dataprovider.IPagamentoDataProvider;
+import br.com.fiap.pedido.gateway.dataprovider.pagamento.PagamentoDtoResponse;
+import br.com.fiap.pedido.gateway.messaging.IPagamentoQueue;
 import br.com.fiap.pedido.gateway.repository.IPedidoRepository;
 import br.com.fiap.pedido.gateway.dataprovider.IProdutoDataProvider;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.stream.Collectors;
 @UseCase
@@ -18,14 +20,15 @@ public class CriarPedidoUseCase implements ICriarPedido {
 
     private final IPedidoRepository pedidoRepository;
     private final IProdutoDataProvider produtoDataProvider;
-    private final IPagamentoDataProvider pagamentoDataProvider;
+    private final IPagamentoQueue pagamentoQueue;
 
-    public CriarPedidoUseCase(IPedidoRepository repository, IProdutoDataProvider produtoDataProvider, IPagamentoDataProvider pagamentoDataProvider) {
+    public CriarPedidoUseCase(IPedidoRepository repository, IProdutoDataProvider produtoDataProvider, IPagamentoQueue pagamentoQueue) {
         this.pedidoRepository = repository;
         this.produtoDataProvider = produtoDataProvider;
-        this.pagamentoDataProvider = pagamentoDataProvider;
+        this.pagamentoQueue = pagamentoQueue;
     }
 
+    @Transactional
     @Override
     public PedidoResponse criar(PedidoRequest request) {
         Pedido pedido;
@@ -42,7 +45,8 @@ public class CriarPedidoUseCase implements ICriarPedido {
 
         final var entity = pedidoRepository.salvar(pedido);
 
-        final var pagamentoResponse = pagamentoDataProvider.criarPagamento(entity, produtos);
+        pagamentoQueue.criarPagamento(entity, produtos);
+        PagamentoDtoResponse pagamentoResponse = pagamentoQueue.validarPagamentoCriado();
 
         return PedidoAdapter.toResponse(entity, pagamentoResponse);
     }
