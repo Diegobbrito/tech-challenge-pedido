@@ -8,6 +8,7 @@ import br.com.fiap.pedido.config.UseCase;
 import br.com.fiap.pedido.core.entity.Pedido;
 import br.com.fiap.pedido.core.entity.Status;
 import br.com.fiap.pedido.core.enumerator.StatusEnum;
+import br.com.fiap.pedido.core.exception.CpfInvalidoException;
 import br.com.fiap.pedido.gateway.dataprovider.IProdutoDataProvider;
 import br.com.fiap.pedido.gateway.messaging.IPagamentoQueue;
 import br.com.fiap.pedido.gateway.repository.IPedidoRepository;
@@ -37,6 +38,9 @@ public class CriarPedidoUseCase implements ICriarPedido {
         String cliente = "";
         if(request.cpf() != null && !request.cpf().isBlank()){
             cliente = request.cpf().trim().replaceAll("\\.", "").replace("-", "");
+            if(!cliente.matches("^\\d{11}$")){
+                throw new CpfInvalidoException("Cpf inválido.");
+            }
         }
         pedido = PedidoAdapter.toPedido(request, cliente, produtos, status);
 
