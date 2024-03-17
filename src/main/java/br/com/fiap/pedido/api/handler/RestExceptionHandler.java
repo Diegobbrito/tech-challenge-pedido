@@ -1,5 +1,6 @@
 package br.com.fiap.pedido.api.handler;
 
+import br.com.fiap.pedido.core.exception.CpfInvalidoException;
 import br.com.fiap.pedido.core.exception.PedidoInexistenteException;
 import br.com.fiap.pedido.core.exception.PedidoStatusException;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,12 @@ public class RestExceptionHandler {
         final var details = new ExceptionDetails(ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(details);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ExceptionDetails> handlerCpfInvalidoException(CpfInvalidoException ex){
+        final var details = new ExceptionDetails(ex.getMessage());
+        return ResponseEntity.badRequest().body(details);
+    }
     @ExceptionHandler
     public ResponseEntity<ExceptionDetails> handlerPedidoStatusException(PedidoStatusException ex){
         final var details = new ExceptionDetails(ex.getMessage());
@@ -23,8 +30,8 @@ public class RestExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<ExceptionDetails> handlerException(Exception ex){
-        final var details = new ExceptionDetails(ex.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(details);
+        final var details = new ExceptionDetails("Erro ao executar");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(details);
     }
 }
 
