@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 @Data
@@ -23,10 +22,8 @@ public class PedidoEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ProdutoPedidoEntity> produtos = new ArrayList<>();
-
-
 
     private BigDecimal valor;
 
@@ -45,7 +42,7 @@ public class PedidoEntity {
         this.dataCriacao = LocalDateTime.now();
         this.produtos = pedido.getProdutos().stream()
                 .map(p -> new ProdutoPedidoEntity(this, p.getProdutoId(), p.getQuantidade()))
-                .collect(Collectors.toList());
+                .toList();
     }
 
 }

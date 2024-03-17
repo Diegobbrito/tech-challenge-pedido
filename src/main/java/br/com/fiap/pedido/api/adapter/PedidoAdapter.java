@@ -7,7 +7,7 @@ import br.com.fiap.pedido.core.entity.Produto;
 import br.com.fiap.pedido.core.entity.ProdutoSelecionado;
 import br.com.fiap.pedido.core.entity.Status;
 import br.com.fiap.pedido.core.enumerator.StatusEnum;
-import br.com.fiap.pedido.gateway.dataprovider.pagamento.CriarPagamentoDto;
+import br.com.fiap.pedido.gateway.messaging.pagamento.CriarPagamentoDto;
 import br.com.fiap.pedido.gateway.repository.pedido.PedidoEntity;
 
 import java.math.BigDecimal;
@@ -19,6 +19,8 @@ import java.util.Locale;
 import java.util.Map;
 
 public class PedidoAdapter {
+
+    private PedidoAdapter(){}
 
     public static Pedido toPedido(PedidoEntity pedidoEntity) {
         final var status = new Status(StatusEnum.from(pedidoEntity.getStatus().getId()));
@@ -69,4 +71,8 @@ public class PedidoAdapter {
         }).toList();
     }
 
+    public static Pedido toPedidoUpdate(PedidoEntity pedidoEntity) {
+        final var status = new Status(StatusEnum.from(pedidoEntity.getStatus().getId()));
+        return new Pedido(pedidoEntity.getId(),pedidoEntity.getValor(), status);
+    }
 }

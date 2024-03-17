@@ -76,7 +76,6 @@ class PedidoControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(pedidoRequest)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.qrData").value(pedidoResponse.getQrData()))
                 .andExpect(jsonPath("$.valorTotal").value(pedidoResponse.getValorTotal()));
 
         verify(criarPedidoUseCase, times(1))

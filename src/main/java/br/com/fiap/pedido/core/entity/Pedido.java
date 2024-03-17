@@ -13,6 +13,12 @@ public class Pedido {
     private String cliente;
     private Status status;
 
+    public Pedido(Integer id, BigDecimal valor, Status status) {
+        this.id = id;
+        this.valor = valor;
+        this.status = status;
+    }
+
     public Pedido(Integer id, List<ProdutoSelecionado> produtos, BigDecimal valor, String cliente, Status status) {
         this.id = id;
         this.produtos = produtos;

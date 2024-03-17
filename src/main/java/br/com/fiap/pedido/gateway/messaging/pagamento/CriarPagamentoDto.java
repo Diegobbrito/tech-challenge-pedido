@@ -1,4 +1,4 @@
-package br.com.fiap.pedido.gateway.dataprovider.pagamento;
+package br.com.fiap.pedido.gateway.messaging.pagamento;
 
 import java.math.BigDecimal;
 import java.util.List;

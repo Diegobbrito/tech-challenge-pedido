@@ -24,7 +24,6 @@ public abstract class PedidoHelper {
 
     public static PedidoResponse gerarPedidoResponse() {
         var response = new PedidoResponse(1, "R$ 19,99","Recebido");
-        response.setQrData("qrData");
         return response;
     }
 

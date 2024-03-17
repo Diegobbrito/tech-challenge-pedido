@@ -8,7 +8,6 @@ import br.com.fiap.pedido.gateway.repository.IPedidoRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 public class PedidoRepository implements IPedidoRepository {
@@ -25,7 +24,7 @@ public class PedidoRepository implements IPedidoRepository {
                 new StatusPedidoEntity(StatusEnum.PRONTO),
                 new StatusPedidoEntity(StatusEnum.PREPARANDO),
                 new StatusPedidoEntity(StatusEnum.RECEBIDO)));
-        return pedidos.stream().map(PedidoAdapter::toPedido).collect(Collectors.toList());
+        return pedidos.stream().map(PedidoAdapter::toPedido).toList();
     }
 
     @Override
@@ -37,7 +36,7 @@ public class PedidoRepository implements IPedidoRepository {
     @Override
     public Pedido atualizar(Pedido pedido) {
         final var pedidoAtualizado = repository.save(PedidoAdapter.toUpdate(pedido));
-        return PedidoAdapter.toPedido(pedidoAtualizado);
+        return PedidoAdapter.toPedidoUpdate(pedidoAtualizado);
     }
 
     @Override
