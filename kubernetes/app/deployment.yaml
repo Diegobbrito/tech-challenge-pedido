@@ -77,6 +77,12 @@ spec:
                 secretKeyRef:
                   name: secret-pedido
                   key: rabbitmq_password
+            - name: spring.rabbitmq.virtual-host
+              valueFrom:
+                secretKeyRef:
+                  name: secret-pedido
+                  key: rabbitmq_user
+
             - name: SECRET
               valueFrom:
                 secretKeyRef:
