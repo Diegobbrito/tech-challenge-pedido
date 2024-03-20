@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
@@ -43,6 +42,6 @@ public class ProdutoAPIDataProvider implements IProdutoDataProvider {
 
         if(response == null)
             throw new IllegalArgumentException("Produtos não encontrados");
-        return response.stream().map(ProdutoAdapter::toProduto).collect(Collectors.toList());
+        return response.stream().map(ProdutoAdapter::toProduto).toList();
     }
 }

@@ -30,8 +30,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@SpringBootTest(classes = {PedidoApplication.class, PedidoControllerTest.class})
 class PedidoControllerTest {
 
     private MockMvc mockMvc;
@@ -76,7 +74,6 @@ class PedidoControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(pedidoRequest)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.qrData").value(pedidoResponse.getQrData()))
                 .andExpect(jsonPath("$.valorTotal").value(pedidoResponse.getValorTotal()));
 
         verify(criarPedidoUseCase, times(1))
@@ -115,7 +112,7 @@ class PedidoControllerTest {
 
         mockMvc.perform(get("/pedidos")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isInternalServerError());
+                .andExpect(status().isBadRequest());
         verify(buscarPedidoUseCase, times(1)).buscarTodos();
     }
 

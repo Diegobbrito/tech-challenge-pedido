@@ -8,42 +8,46 @@ import br.com.fiap.pedido.config.UseCase;
 import br.com.fiap.pedido.core.entity.Pedido;
 import br.com.fiap.pedido.core.entity.Status;
 import br.com.fiap.pedido.core.enumerator.StatusEnum;
-import br.com.fiap.pedido.gateway.dataprovider.IPagamentoDataProvider;
-import br.com.fiap.pedido.gateway.repository.IPedidoRepository;
+import br.com.fiap.pedido.core.exception.CpfInvalidoException;
 import br.com.fiap.pedido.gateway.dataprovider.IProdutoDataProvider;
-
-import java.util.stream.Collectors;
+import br.com.fiap.pedido.gateway.messaging.IPagamentoQueue;
+import br.com.fiap.pedido.gateway.repository.IPedidoRepository;
+import org.springframework.transaction.annotation.Transactional;
 @UseCase
 public class CriarPedidoUseCase implements ICriarPedido {
 
     private final IPedidoRepository pedidoRepository;
     private final IProdutoDataProvider produtoDataProvider;
-    private final IPagamentoDataProvider pagamentoDataProvider;
+    private final IPagamentoQueue pagamentoQueue;
 
-    public CriarPedidoUseCase(IPedidoRepository repository, IProdutoDataProvider produtoDataProvider, IPagamentoDataProvider pagamentoDataProvider) {
+    public CriarPedidoUseCase(IPedidoRepository repository, IProdutoDataProvider produtoDataProvider, IPagamentoQueue pagamentoQueue) {
         this.pedidoRepository = repository;
         this.produtoDataProvider = produtoDataProvider;
-        this.pagamentoDataProvider = pagamentoDataProvider;
+        this.pagamentoQueue = pagamentoQueue;
     }
 
+    @Transactional
     @Override
     public PedidoResponse criar(PedidoRequest request) {
         Pedido pedido;
 
-        final var ids = request.produtos().stream().map(ProdutoSelecionadoRequest::produtoId).collect(Collectors.toList());
+        final var ids = request.produtos().stream().map(ProdutoSelecionadoRequest::produtoId).toList();
         final var produtos = produtoDataProvider.buscarTodosPorIds(ids);
 
         final var status = new Status(StatusEnum.PAGAMENTOPENDENTE);
         String cliente = "";
         if(request.cpf() != null && !request.cpf().isBlank()){
-            cliente = request.cpf().trim().replaceAll("\\.", "").replaceAll("-", "");
+            cliente = request.cpf().trim().replaceAll("\\.", "").replace("-", "");
+            if(!cliente.matches("^\\d{11}$")){
+                throw new CpfInvalidoException("Cpf inválido.");
+            }
         }
         pedido = PedidoAdapter.toPedido(request, cliente, produtos, status);
 
         final var entity = pedidoRepository.salvar(pedido);
 
-        final var pagamentoResponse = pagamentoDataProvider.criarPagamento(entity, produtos);
+        pagamentoQueue.criarPagamento(entity, produtos);
 
-        return PedidoAdapter.toResponse(entity, pagamentoResponse);
+        return PedidoAdapter.toResponse(entity);
     }
 }
