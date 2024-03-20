@@ -99,4 +99,4 @@ jobs:
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
-          oc apply -f deployment.yaml
+          oc apply -f ./deployment.yaml
