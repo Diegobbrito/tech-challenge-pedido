@@ -95,9 +95,12 @@ jobs:
         run: |
           oc login --token=${{ secrets.OCP_TOKEN }} --server=${{ secrets.OCP_SERVER }}
 
+
+      - name: List files in directory
+        run: ls -R
+
       - name: Deploy to OpenShift
         env:
           KUBECONFIG: ${{ secrets.KUBECONFIG }}
         run: |
-          ls
           oc apply -f ./deployment.yaml
