@@ -7,10 +7,10 @@ Aplicação para criação e gerenciamento de pedido.
 ## Saga
 -  Coreografa: Escolhemos a Saga Coreografada pela fácil implementação dado o tamanho necessário para o fluxo de pagamento. E não queriamos criar a dependencia de apenas um serviço causar indisponibilidade do fluxo.
 -  Utilizado: [Cloudampq](https://www.cloudamqp.com/)
-   ![Saga](https://github.com/Diegobbrito/tech-challenge-pedido/blob/main/docs/Saga.jpg?raw=true)
+   ![Saga](https://github.com/Diegobbrito/tech-challenge-pedido/blob/main/docs/Saga.png)
 
 ## OWASP ZAP
-- Os relatorios se encontram na pasta docs
+- Os relatorios se encontram na pasta [docs](https://github.com/Diegobbrito/tech-challenge-pedido/tree/main/docs)
 
 ## Link da projeto no SonarCloud
 -  [SonarCloud - Pedido](https://sonarcloud.io/project/overview?id=Diegobbrito_tech-challenge-pedido)
